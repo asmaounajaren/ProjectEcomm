@@ -71,12 +71,12 @@ router.get("/", async (req, res) => {
     try {
         let products;
 
-        if (qNew) {
-            products = await Product.find().sort({ createdAt: -1 }).limit(1)
+        if (qNew) { //get the last new product
+            products = await Product.find().sort({ createdAt: -1 }).limit(2)
         } else if (qCategory) {
             products = await Product.find({
                 categories: {
-                    $n: [qCategory],
+                    $in: [qCategory],
                 },
             });
         }else{

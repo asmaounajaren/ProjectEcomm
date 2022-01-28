@@ -14,7 +14,7 @@ router.post("/", verifyToken, async (req, res) => {
 
     try {
         const saveOrder = await newOrder.save();
-        res.status(200).json(saveOrder).save();
+        res.status(200).json(saveOrder);
     } catch (err) {
         res.status(500).json(err);
     }

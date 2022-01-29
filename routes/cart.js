@@ -13,8 +13,8 @@ router.post("/", verifyToken, async (req, res) => {
     const newCart = new Cart(req.body);
 
     try {
-        const saveCart = await newCart.save();
-        res.status(200).json(saveCart).save();
+        const savedCart = await newCart.save();
+        res.status(200).json(savedCart);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -25,14 +25,14 @@ router.post("/", verifyToken, async (req, res) => {
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 
     try {
-        const updateCart= await Cart.findByIdAndUpdate(
+        const updatedCart= await Cart.findByIdAndUpdate(
             req.params.id,
             {
-                $set: req.body
+                $set: req.body,
             },
             { new: true }
         );
-        res.status(200).json(updateCart);
+        res.status(200).json(updatedCart);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -72,8 +72,4 @@ router.get("/",verifyTokenAndAdmin,async(req,res)=>{
         res.status(500).json(err);
     }  
 })
-
-
-
-
-module.exports = router
+module.exports = router;
